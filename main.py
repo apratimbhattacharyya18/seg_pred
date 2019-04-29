@@ -9,7 +9,6 @@ import random
 import threading
 import os
 import sys
-import cv2
 import math
 import time
 import pickle

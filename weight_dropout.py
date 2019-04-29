@@ -9,7 +9,6 @@ import random
 import threading
 import os
 import sys
-import cv2
 
 from keras.layers import Input, Dense, Conv2D, MaxPooling2D, UpSampling2D, Reshape, merge, Lambda, RepeatVector, BatchNormalization, Activation, Dropout
 from keras.layers.merge import concatenate, add
