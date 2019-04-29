@@ -211,8 +211,8 @@ print('Done.')
 
 print('Loading val data ...')
 
-test_examples = 120;
-test_samples = 50;
+test_examples = 500;
+test_samples = 5;
 ( data_val_X_f, data_val_X_o, data_val_Y, data_val_Y_) = dataloader.get_val_data(test_examples,test_samples);#, data_X_o
 
 print('Done.')

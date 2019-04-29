@@ -122,24 +122,16 @@ class DataLoader:
 				seq_num = curr_seq[-1].split('_')[1];
 				frame_num = curr_seq[-1].split('_')[2];
 
-				gt_name = '/BS/cityscapes00/Cityscapes/gtFine/val/' + city + '/' + city + '_' + seq_num + '_' + frame_num + '_' + 'gtFine_labelTrainIds.png'
-
-				gt = cv2.imread(gt_name, cv2.IMREAD_GRAYSCALE);
-				#print(np.unique(gt))
-				gt = cv2.resize(gt, (0,0), fx=0.125, fy=0.125)
-
 				data_X_s.append( np.concatenate(curr_seq_segs[0:4], axis = -1) )
 				data_X_o.append( np.concatenate(curr_seq_odo, axis = 0) )
 
 				data_Y_.append(curr_seq_segs[-1] )
-				data_Y.append( np.expand_dims(gt,axis=2) )
 
-				if len(data_Y) == num_of_test_examples:
+				if len(data_Y_) == num_of_test_examples:
 					break;
 
 			data_X_s = np.array(data_X_s);
 			data_X_o = np.array(data_X_o);
-			data_Y = np.array(data_Y);
 			data_Y_ = np.array(data_Y_);
 			f.close();
 
@@ -151,7 +143,7 @@ class DataLoader:
 			data_X_o = np.repeat(data_X_o,test_samples,axis=1)
 			data_X_o = np.reshape(data_X_o,(data_X_o.shape[0]*test_samples,data_X_o.shape[2],data_X_o.shape[3]));
 
-			np.save('val_gt.npy',data_Y)
+			data_Y = np.load('val_gt.npy')[:num_of_test_examples]
 
 			return ( data_X_s, data_X_o, data_Y, data_Y_)
 
